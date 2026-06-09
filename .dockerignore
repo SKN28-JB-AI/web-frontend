@@ -1,0 +1,4 @@
+node_modules
+dist
+.git
+# .env 는 유지 — Vite 빌드가 VITE_* 를 읽어 번들에 굽는다.
