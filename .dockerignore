@@ -1,4 +1,4 @@
 node_modules
 dist
 .git
-# .env 는 유지 — Vite 빌드가 VITE_* 를 읽어 번들에 굽는다.
+# .env 는 빌드 컨텍스트에 유지 — VITE_* 는 "런타임 env.js 미설정 시" 폴백으로만 쓰인다.
