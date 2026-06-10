@@ -5,9 +5,9 @@ const MENU = [
   {
     group: "Multi-Modal Agent",
     items: [
-      { to: "/mma/videos", label: "영상 생성 (v1)" },
-      { to: "/mma/jobs", label: "영상 잡 목록 (v1)" },
-      { to: "/mma/ads", label: "광고 파이프라인 (v2)" },
+      { to: "/mma/videos", label: "영상 생성" },
+      { to: "/mma/jobs", label: "영상 작업 목록" },
+      { to: "/mma/ads", label: "광고 파이프라인" },
     ],
   },
   {

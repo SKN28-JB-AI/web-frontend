@@ -35,7 +35,7 @@ export default function JobList() {
   return (
     <div className="page">
       <PageHeader
-        title="영상 잡 목록 (v1)"
+        title="영상 작업 목록"
         subtitle="GET /v1/jobs — 5초마다 자동 갱신"
         actions={
           <button className="btn" onClick={load}>

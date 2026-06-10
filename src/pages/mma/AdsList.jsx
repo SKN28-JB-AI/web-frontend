@@ -35,7 +35,7 @@ export default function AdsList() {
   return (
     <div className="page">
       <PageHeader
-        title="광고 파이프라인 (v2)"
+        title="광고 파이프라인"
         subtitle="스토리보드 → 이미지 → 비디오 → 기획서 4단계 잡"
         actions={
           <>

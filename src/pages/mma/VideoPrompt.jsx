@@ -123,7 +123,7 @@ export default function VideoPrompt() {
   return (
     <div className="page">
       <PageHeader
-        title="영상 생성 (v1)"
+        title="영상 생성"
         subtitle="메시지 또는 PDF 기획서로 광고 영상 생성 잡을 만듭니다."
       />
 
