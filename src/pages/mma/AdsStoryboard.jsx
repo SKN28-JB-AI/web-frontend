@@ -59,7 +59,7 @@ export default function AdsStoryboard() {
             required
             value={form.prompt}
             onChange={(e) => setForm({ ...form, prompt: e.target.value })}
-            placeholder="예: MZ세대를 겨냥한 비대면 대출 상품의 신뢰감 있는 30초 영상 광고"
+            placeholder="예: MZ세대를 겨냥한 비대면 대출 상품의 신뢰감 있는 15초 영상 광고"
           />
         </Field>
         <div className="form-row">

@@ -37,7 +37,7 @@ export default function AdsList() {
     <div className="page">
       <PageHeader
         title="광고 파이프라인"
-        subtitle="스토리보드 → 이미지 → 비디오 → 기획서 4단계 잡"
+        subtitle="스토리보드 → 이미지 → 비디오 → 기획서 [4단계 작업]"
         actions={
           <>
             <Link className="btn btn-primary" to="/mma/ads/new">

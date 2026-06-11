@@ -40,7 +40,7 @@ export default function JobDetail() {
   return (
     <div className="page">
       <PageHeader
-        title="영상 잡 상세"
+        title="영상생성 작업"
         subtitle={job.job_id}
         actions={
           <>

@@ -124,7 +124,7 @@ export default function VideoPrompt() {
     <div className="page">
       <PageHeader
         title="영상 생성"
-        subtitle="메시지 또는 PDF 기획서로 광고 영상 생성 잡을 만듭니다."
+        subtitle="메시지 또는 PDF 기획서를 기반으로 광고 영상을 생성합니다."
       />
 
       <div className="tabs">
@@ -153,7 +153,7 @@ export default function VideoPrompt() {
               required
               value={msg.prompt}
               onChange={(e) => setMsg({ ...msg, prompt: e.target.value })}
-              placeholder="예: 청년 적금 상품을 소개하는 밝고 경쾌한 30초 광고"
+              placeholder="예: 청년 적금 상품을 소개하는 밝고 경쾌한 15초 광고"
             />
           </Field>
           <div className="form-row">
