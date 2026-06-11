@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { PageHeader, Field } from "../../components/ui.jsx";
+import CouponBadge from "../../components/CouponBadge.jsx";
 
 const TEXT_EXPOSURE = ["", "none", "minimal", "moderate", "full"];
 
@@ -126,6 +127,9 @@ export default function VideoPrompt() {
         title="영상 생성"
         subtitle="메시지 또는 PDF 기획서를 기반으로 광고 영상을 생성합니다."
       />
+      <div style={{ marginBottom: 14 }}>
+        <CouponBadge type="video" />
+      </div>
 
       <div className="tabs">
         <button

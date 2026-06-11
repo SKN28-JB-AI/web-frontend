@@ -22,6 +22,15 @@ const MENU = [
 
 export default function Layout() {
   const { user, logout } = useAuth();
+  const menu = user?.admin
+    ? [
+        ...MENU,
+        {
+          group: "관리자",
+          items: [{ to: "/admin/users", label: "사용자 관리" }],
+        },
+      ]
+    : MENU;
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -30,7 +39,7 @@ export default function Layout() {
           <span className="brand-text">AI 마케팅 플랫폼</span>
         </div>
         <nav className="nav">
-          {MENU.map((g) => (
+          {menu.map((g) => (
             <div className="nav-group" key={g.group}>
               <div className="nav-group-title">{g.group}</div>
               {g.items.map((it) => (

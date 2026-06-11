@@ -12,6 +12,7 @@ import AdsStoryboard from "./pages/mma/AdsStoryboard.jsx";
 import AdsPipeline from "./pages/mma/AdsPipeline.jsx";
 import TranslationPrompt from "./pages/translation/TranslationPrompt.jsx";
 import RecommendationPrompt from "./pages/recommendation/RecommendationPrompt.jsx";
+import AdminUsers from "./pages/admin/AdminUsers.jsx";
 
 export const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -32,6 +33,8 @@ export const router = createBrowserRouter([
       { path: "mma/ads", element: <AdsList /> },
       { path: "mma/ads/new", element: <AdsStoryboard /> },
       { path: "mma/ads/:jobId", element: <AdsPipeline /> },
+      // 관리자 전용
+      { path: "admin/users", element: <AdminUsers /> },
       // 미구현 에이전트 (빈 프롬프트 페이지)
       { path: "translation", element: <TranslationPrompt /> },
       { path: "recommendation", element: <RecommendationPrompt /> },

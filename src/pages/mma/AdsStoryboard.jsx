@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { PageHeader, Field } from "../../components/ui.jsx";
+import CouponBadge from "../../components/CouponBadge.jsx";
 
 // 1단계: 스토리보드 생성 프롬프트 페이지 (POST /v2/ads/storyboards)
 export default function AdsStoryboard() {
@@ -51,6 +52,9 @@ export default function AdsStoryboard() {
         title="광고 파이프라인 · 새 스토리보드"
         subtitle="프롬프트로 광고 스토리보드를 생성하고 4단계 파이프라인을 시작합니다."
       />
+      <div style={{ marginBottom: 14 }}>
+        <CouponBadge type="ad" />
+      </div>
       {error && <div className="alert err">{error}</div>}
       <form className="card form" onSubmit={submit}>
         <Field label="광고 프롬프트" hint="캠페인 목표·상품·톤을 자유롭게 작성하세요.">
