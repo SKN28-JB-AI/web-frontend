@@ -253,8 +253,7 @@ details summary { cursor: pointer; font-size: 13px; color: var(--jb-accent); mar
 .stage-dur { color: var(--ink-soft); }
 .stage-card-meta { display: flex; align-items: center; gap: 10px; }
 .stage-mini { display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
-  border-left: 1px solid var(--line); padding-left: 8px; }
-.stage-mini:first-child { border-left: none; padding-left: 0; }
+  border-top: 1px solid var(--line); padding-top: 8px; }
 .stage-mini-label { font-size: 11.5px; font-weight: 700; color: var(--ink-soft); text-align: left; }
 
 @media (max-width: 720px) {
