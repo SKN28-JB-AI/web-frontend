@@ -5,6 +5,20 @@ import { PageHeader, Field } from "../../components/ui.jsx";
 import CouponBadge from "../../components/CouponBadge.jsx";
 
 const TEXT_EXPOSURE = ["", "none", "minimal", "moderate", "full"];
+const DEFAULT_DURATION = 8; // 영상 길이 기본값(초)
+
+// 모델의 지원 길이 목록에서 기본값(8초)에 가장 가까운 값을 고른다.
+function nearestDuration(durations, target = DEFAULT_DURATION) {
+  if (!durations || durations.length === 0) return target;
+  return durations.reduce((a, b) =>
+    Math.abs(b - target) < Math.abs(a - target) ? b : a
+  );
+}
+
+function durationsOf(models, name) {
+  const m = models.find((x) => x.name === name);
+  return m?.supported_durations || [];
+}
 
 export default function VideoPrompt() {
   const { authFetch } = useAuth();
@@ -20,7 +34,7 @@ export default function VideoPrompt() {
     prompt: "",
     model: "",
     language: "ko",
-    duration_sec: "",
+    duration_sec: DEFAULT_DURATION,
     aspect_ratio: "16:9",
     resolution: "1080p",
     generate_audio: true,
@@ -55,7 +69,8 @@ export default function VideoPrompt() {
         setModels(data.models || []);
         const first = (data.models || []).find((m) => m.configured) || data.models?.[0];
         if (first) {
-          setMsg((s) => ({ ...s, model: first.name }));
+          const dur = nearestDuration(first.supported_durations);
+          setMsg((s) => ({ ...s, model: first.name, duration_sec: dur }));
           setPdf((s) => ({ ...s, model: first.name }));
         }
       } catch (e) {
@@ -79,7 +94,7 @@ export default function VideoPrompt() {
         enhance_prompt: msg.enhance_prompt,
         logo_outro: msg.logo_outro,
       };
-      if (msg.duration_sec) body.duration_sec = Number(msg.duration_sec);
+      if (msg.duration_sec) body.duration_sec = Number(msg.duration_sec); // 드롭다운: 항상 모델 지원값
       if (msg.text_exposure) body.text_exposure = msg.text_exposure;
       const res = await authFetch("/v1/videos/message", {
         method: "POST",
@@ -120,6 +135,8 @@ export default function VideoPrompt() {
       setSubmitting(false);
     }
   };
+
+  const msgDurations = durationsOf(models, msg.model);
 
   return (
     <div className="page">
@@ -165,7 +182,17 @@ export default function VideoPrompt() {
               <ModelSelect
                 models={models}
                 value={msg.model}
-                onChange={(v) => setMsg({ ...msg, model: v })}
+                onChange={(v) =>
+                  setMsg((s) => ({
+                    ...s,
+                    model: v,
+                    // 새 모델이 지원하는 길이로 보정(현재 값 우선, 없으면 8초 기준)
+                    duration_sec: nearestDuration(
+                      durationsOf(models, v),
+                      Number(s.duration_sec) || DEFAULT_DURATION
+                    ),
+                  }))
+                }
               />
             </Field>
             <Field label="발화 언어">
@@ -175,14 +202,29 @@ export default function VideoPrompt() {
                 placeholder="ko"
               />
             </Field>
-            <Field label="클립 길이(초)" hint="비우면 모델 기본값">
-              <input
-                type="number"
-                min="2"
-                max="20"
-                value={msg.duration_sec}
-                onChange={(e) => setMsg({ ...msg, duration_sec: e.target.value })}
-              />
+            <Field
+              label="클립 길이(초)"
+              hint={
+                msgDurations.length
+                  ? `${msg.model} 지원: 최대 ${Math.max(...msgDurations)}초`
+                  : "모델을 먼저 선택하세요"
+              }
+            >
+              <select
+                value={String(msg.duration_sec)}
+                onChange={(e) =>
+                  setMsg({ ...msg, duration_sec: Number(e.target.value) })
+                }
+                disabled={!msgDurations.length}
+              >
+                {(msgDurations.length ? msgDurations : [DEFAULT_DURATION]).map(
+                  (d) => (
+                    <option key={d} value={String(d)}>
+                      {d}초{d === DEFAULT_DURATION ? " (기본)" : ""}
+                    </option>
+                  )
+                )}
+              </select>
             </Field>
           </div>
           <div className="form-row">
