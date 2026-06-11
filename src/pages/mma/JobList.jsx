@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { PageHeader } from "../../components/ui.jsx";
 import { StatusPill } from "../../components/ui.jsx";
+import { elapsedSec, fmtDateTime, fmtDuration } from "../../lib/time.js";
 
 export default function JobList() {
   const { authFetch } = useAuth();
@@ -60,7 +61,9 @@ export default function JobList() {
                 <th>모델</th>
                 <th>상태</th>
                 <th>진행률</th>
-                <th>생성</th>
+                <th>시작</th>
+                <th>완료</th>
+                <th>소요</th>
                 <th></th>
               </tr>
             </thead>
@@ -81,7 +84,9 @@ export default function JobList() {
                       />
                     </div>
                   </td>
-                  <td className="muted">{fmt(j.created_at)}</td>
+                  <td className="muted">{fmtDateTime(j.started_at)}</td>
+                  <td className="muted">{fmtDateTime(j.finished_at)}</td>
+                  <td className="muted">{fmtJobDuration(j)}</td>
                   <td>
                     <Link className="btn btn-sm" to={`/mma/jobs/${j.job_id}`}>
                       상세
@@ -97,10 +102,11 @@ export default function JobList() {
   );
 }
 
-function fmt(iso) {
-  try {
-    return new Date(iso).toLocaleString("ko-KR");
-  } catch {
-    return iso;
-  }
+// 완료/실패면 서버 계산값, 진행 중이면 현재까지 경과시간
+function fmtJobDuration(j) {
+  if (j.status === "queued") return "-";
+  const sec = j.duration_sec ?? elapsedSec(j.started_at, j.finished_at);
+  if (sec == null) return "-";
+  const label = fmtDuration(sec);
+  return j.finished_at ? label : label + " 경과";
 }

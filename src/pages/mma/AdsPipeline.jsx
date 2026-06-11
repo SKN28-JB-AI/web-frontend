@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { PageHeader, StatusPill } from "../../components/ui.jsx";
 import { AuthedImage, AuthedVideo, DownloadButton } from "../../components/AuthedMedia.jsx";
+import { StageTimes } from "../../components/StageTimes.jsx";
 
 const STAGE_REQUIRES = {
   storyboard: [],
@@ -155,6 +156,7 @@ export default function AdsPipeline() {
             <span className="pstep-no">{i + 1}</span>
             <span className="pstep-label">{STAGE_LABEL[s]}</span>
             <StatusPill status={stageStatus(s)} />
+            <StageTimes stage={job.stages?.[s]} />
           </div>
         ))}
       </div>
@@ -303,7 +305,10 @@ function StageCard({ name, job, children }) {
     <div className="card stage-card">
       <div className="stage-card-head">
         <h3>{STAGE_LABEL[name]}</h3>
-        <StatusPill status={st?.status || "pending"} />
+        <div className="stage-card-meta">
+          <StageTimes stage={st} />
+          <StatusPill status={st?.status || "pending"} />
+        </div>
       </div>
       {st?.error && <div className="alert err">{st.error}</div>}
       {children}

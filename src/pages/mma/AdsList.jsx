@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { PageHeader, StatusPill } from "../../components/ui.jsx";
+import { StageTimes } from "../../components/StageTimes.jsx";
 
 const STAGES = ["storyboard", "images", "videos", "pdf"];
 
@@ -69,6 +70,7 @@ export default function AdsList() {
                   <div className="stage-mini" key={s}>
                     <span className="stage-mini-label">{s}</span>
                     <StatusPill status={j.stages?.[s]?.status || "pending"} />
+                    <StageTimes stage={j.stages?.[s]} />
                   </div>
                 ))}
               </div>

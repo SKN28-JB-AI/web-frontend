@@ -241,6 +241,9 @@ details summary { cursor: pointer; font-size: 13px; color: var(--jb-accent); mar
 .ad-card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
 .clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .stage-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.stage-times { font-size: 11px; color: var(--muted); white-space: nowrap; }
+.stage-dur { color: var(--ink-soft); }
+.stage-card-meta { display: flex; align-items: center; gap: 10px; }
 .stage-mini { display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .stage-mini-label { font-size: 10px; color: var(--muted); }
 

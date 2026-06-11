@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router";
 import { useAuth } from "../../auth/AuthContext.jsx";
 import { PageHeader, StatusPill } from "../../components/ui.jsx";
 import { AuthedVideo, DownloadButton } from "../../components/AuthedMedia.jsx";
+import { elapsedSec, fmtDateTime, fmtDuration } from "../../lib/time.js";
 
 export default function JobDetail() {
   const { jobId } = useParams();
@@ -60,6 +61,14 @@ export default function JobDetail() {
           <div>
             <span className="muted">진행률</span>{" "}
             {Math.round((job.progress || 0) * 100)}%
+          </div>
+          <div><span className="muted">시작</span> {fmtDateTime(job.started_at)}</div>
+          <div><span className="muted">완료</span> {fmtDateTime(job.finished_at)}</div>
+          <div>
+            <span className="muted">소요</span>{" "}
+            {job.status === "queued"
+              ? "-"
+              : fmtDuration(job.duration_sec ?? elapsedSec(job.started_at, job.finished_at))}
           </div>
         </div>
         {job.error && <div className="alert err">{job.error}</div>}
