@@ -62,6 +62,9 @@ export default function Layout() {
             <div className="user-name">{user?.name || user?.username || "사용자"}</div>
             <div className="user-sub muted">{user?.username}</div>
           </div>
+          <NavLink to="/account/password" className="btn btn-ghost">
+            비밀번호 변경
+          </NavLink>
           <button className="btn btn-ghost" onClick={logout}>
             로그아웃
           </button>
