@@ -164,6 +164,9 @@ export default function AdsPipeline() {
       <div className="card">
         <span className="muted">프롬프트</span>
         <p>{job.prompt}</p>
+        {job.requested_by && (
+          <p className="muted">요청자: {job.requested_by}</p>
+        )}
       </div>
 
       {/* 1단계: 스토리보드 */}

@@ -59,6 +59,7 @@ export default function JobList() {
                 <th>Job ID</th>
                 <th>모드</th>
                 <th>모델</th>
+                <th>요청자</th>
                 <th>상태</th>
                 <th>진행률</th>
                 <th>시작</th>
@@ -73,6 +74,7 @@ export default function JobList() {
                   <td className="mono">{j.job_id.slice(0, 10)}</td>
                   <td>{j.mode}</td>
                   <td>{j.model}</td>
+                  <td>{j.requested_by || ""}</td>
                   <td>
                     <StatusPill status={j.status} />
                   </td>

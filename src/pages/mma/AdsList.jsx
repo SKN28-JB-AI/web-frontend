@@ -65,6 +65,9 @@ export default function AdsList() {
                 <span className="mono muted">{j.job_id.slice(0, 8)}</span>
               </div>
               <p className="muted clamp">{j.prompt}</p>
+              {j.requested_by && (
+                <p className="muted requester">요청자: {j.requested_by}</p>
+              )}
               <div className="stage-row">
                 {STAGES.map((s) => (
                   <div className="stage-mini" key={s}>

@@ -58,6 +58,9 @@ export default function JobDetail() {
           <div><span className="muted">상태</span> <StatusPill status={job.status} /></div>
           <div><span className="muted">모드</span> {job.mode}</div>
           <div><span className="muted">모델</span> {job.model}</div>
+          {job.requested_by && (
+            <div><span className="muted">요청자</span> {job.requested_by}</div>
+          )}
           <div>
             <span className="muted">진행률</span>{" "}
             {Math.round((job.progress || 0) * 100)}%
